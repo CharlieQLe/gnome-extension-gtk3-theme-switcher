@@ -1,0 +1,11 @@
+{
+  "name": "GTK3 Theme Switcher",
+  "description": "A simple GTK 3.0 theme switcher",
+  "uuid": "gtk3-theme-switcher@charlieqle",
+  "shell-version": [
+    "42",
+    "43"
+  ],
+  "url": "https://github.com/CharlieQLe/gnome-extension-gtk3-theme-switcher",
+  "settings-schema": "org.gnome.shell.extensions.gtk3-theme-switcher"
+}

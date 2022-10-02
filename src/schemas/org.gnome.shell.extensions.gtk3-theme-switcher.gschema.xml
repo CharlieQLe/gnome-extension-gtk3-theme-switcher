@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <schema id="org.gnome.shell.extensions.gtk3-theme-switcher" path="/org/gnome/shell/extensions/gtk3-theme-switcher/">
+        <key name="light" type="s">
+            <default>"Adwaita"</default>
+        </key>
+        <key name="dark" type="s">
+            <default>"Adwaita-dark"</default>
+        </key>
+    </schema>
+</schemalist>
