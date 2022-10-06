@@ -36,7 +36,7 @@ function fillPreferencesWindow(window) {
     // Add the general settings
     window.add(builder.get_object('general'));
 
-    // Bind settings to switches
+    // Bind settings to widgets
     ThemeSettings.getKeys().forEach(key => {
         const widget = builder.get_object(key.replaceAll('-', '_'));
         widget.set_model(stringList);

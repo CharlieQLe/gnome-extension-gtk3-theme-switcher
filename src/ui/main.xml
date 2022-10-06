@@ -4,25 +4,13 @@
         <child>
             <object class="AdwPreferencesGroup">
                 <child>
-                    <object class="AdwActionRow">
+                    <object class="AdwComboRow" id="light">
                         <property name="title">Light Theme</property>
-                        <property name="activatable-widget">light</property>
-                        <child>
-                            <object class="GtkDropDown" id="light">
-                                <property name="valign">center</property>
-                            </object>
-                        </child>
                     </object>
                 </child>
                 <child>
-                    <object class="AdwActionRow">
+                    <object class="AdwComboRow" id="dark">
                         <property name="title">Dark Theme</property>
-                        <property name="activatable-widget">dark</property>
-                        <child>
-                            <object class="GtkDropDown" id="dark">
-                                <property name="valign">center</property>
-                            </object>
-                        </child>
                     </object>
                 </child>
             </object>
