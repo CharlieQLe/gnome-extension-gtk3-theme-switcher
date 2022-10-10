@@ -1,17 +1,12 @@
 'use strict';
 
-const { Gio, GLib, Gtk } = imports.gi;
+const { Gio } = imports.gi;
 
 var Settings = class Settings {
     constructor(schema) {
         this._schema = schema;
     }
-
-    destroy() {
-        this._schema.run_dispose();
-        this._schema = null;
-    }
-
+    
     get schema() { 
         return this._schema;
     }
@@ -115,31 +110,4 @@ var InterfaceSettings = class InterfaceSettings extends Settings {
     onChangedColorScheme(func) {
         this.onChanged(InterfaceSettings.COLOR_SCHEME, func);
     }
-}
-
-function _addTheme(themes, path) {
-    const resourceDir = Gio.File.new_for_path(path);
-    if (resourceDir.query_file_type(Gio.FileQueryInfoFlags.NONE, null) !== Gio.FileType.DIRECTORY) return themes;
-    const enumerator = resourceDir.enumerate_children('standard::', Gio.FileQueryInfoFlags.NONE, null);
-    while (true) {
-        const info = enumerator.next_file(null);
-        if (info === null) break;
-        const dir = enumerator.get_child(info);
-        if (dir === null) continue;
-        const version = [0, Gtk.MINOR_VERSION].find(gtkVersion => {
-            if (gtkVersion % 2) gtkVersion++;
-            return Gio.File.new_for_path(GLib.build_filenamev([dir.get_path(), `gtk-3.${gtkVersion}`, 'gtk.css'])).query_exists(null);
-        });
-        if (version !== undefined) themes.add(dir.get_basename());
-    }
-    enumerator.close(null);
-    return themes;
-}
-
-function getThemes() {
-    return [
-        GLib.build_filenamev([GLib.get_home_dir(), '.themes']),
-        GLib.build_filenamev([GLib.get_user_data_dir(), 'themes']),
-        ...GLib.get_system_data_dirs().map(path => GLib.build_filenamev([path, 'themes']))
-    ].reduce(_addTheme, new Set());
 }

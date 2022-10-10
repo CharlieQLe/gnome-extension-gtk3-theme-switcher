@@ -23,7 +23,7 @@
 const Main = imports.ui.main;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const { ThemeSettings, InterfaceSettings, getThemes } = Me.imports.common;
+const { ThemeSettings, InterfaceSettings } = Me.imports.settings;
 
 class Extension {
     constructor(uuid) {
@@ -42,8 +42,6 @@ class Extension {
     }
 
     disable() {
-        this._themeSettings.destroy();
-        this._interfaceSettings.destroy();
         this._themeSettings = null;
         this._interfaceSettings = null;
     }
