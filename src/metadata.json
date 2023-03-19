@@ -4,7 +4,8 @@
   "uuid": "gtk3-theme-switcher@charlieqle",
   "shell-version": [
     "42",
-    "43"
+    "43",
+    "44"
   ],
   "url": "https://github.com/CharlieQLe/gnome-extension-gtk3-theme-switcher",
   "settings-schema": "org.gnome.shell.extensions.gtk3-theme-switcher"
