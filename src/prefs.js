@@ -25,6 +25,7 @@ function init(meta) { }
 function fillPreferencesWindow(window) {
     const themeSettings = ThemeSettings.getNewSchema();
     const builder = new Gtk.Builder();
+    window.set_default_size(360, 206);
 
     // Get themes
     const themes = Array.from([
