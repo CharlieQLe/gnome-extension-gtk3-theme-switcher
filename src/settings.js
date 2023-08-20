@@ -1,58 +1,47 @@
-'use strict';
+import Gio from 'gi://Gio';
 
-const { Gio } = imports.gi;
-
-var Settings = class Settings {
+class Settings {
     constructor(schema) {
         this._schema = schema;
     }
-    
-    get schema() { 
+
+    get schema() {
         return this._schema;
     }
 
-    onChanged(key, func) { 
-        this._schema.connect(`changed::${key}`, func); 
+    onChanged(key, func) {
+        this._schema.connect(`changed::${key}`, func);
     }
 
-    getBoolean(key) { 
-        return this._schema.get_boolean(key); 
+    getBoolean(key) {
+        return this._schema.get_boolean(key);
     }
 
-    setBoolean(key, value) { 
-        this._schema.set_boolean(key, value); 
+    setBoolean(key, value) {
+        this._schema.set_boolean(key, value);
     }
 
-    getString(key) { 
-        return this._schema.get_string(key); 
+    getString(key) {
+        return this._schema.get_string(key);
     }
 
-    setString(key, value) { 
-        this._schema.set_string(key, value); 
+    setString(key, value) {
+        this._schema.set_string(key, value);
     }
 }
 
 /**
  * Handles settings for this extension.
  */
-var ThemeSettings = class ThemeSettings extends Settings {
+export class ThemeSettings extends Settings {
     static LIGHT_THEME_NAME = "light";
     static DARK_THEME_NAME = "dark";
-
-    static getNewSchema() {
-        const extensionUtils = imports.misc.extensionUtils;
-        return extensionUtils.getSettings(extensionUtils.getCurrentExtension().metadata['settings-schema']);
-    }
 
     static getKeys() {
         return [
             this.LIGHT_THEME_NAME,
             this.DARK_THEME_NAME
         ];
-    }
-    
-    constructor() { 
-        super(ThemeSettings.getNewSchema()); 
     }
 
     get lightThemeName() {
@@ -83,10 +72,10 @@ var ThemeSettings = class ThemeSettings extends Settings {
 /**
  * Handles settings for the desktop interface.
  */
-var InterfaceSettings = class InterfaceSettings extends Settings {
+export class InterfaceSettings extends Settings {
     static COLOR_SCHEME = "color-scheme";
     static GTK_THEME = "gtk-theme";
-    
+
     static getNewSchema() {
         return new Gio.Settings({ schema: 'org.gnome.desktop.interface' });
     }
@@ -98,7 +87,7 @@ var InterfaceSettings = class InterfaceSettings extends Settings {
     get colorScheme() {
         return this.getString(InterfaceSettings.COLOR_SCHEME);
     }
-    
+
     get gtkTheme() {
         return this.getString(InterfaceSettings.GTK_THEME);
     }

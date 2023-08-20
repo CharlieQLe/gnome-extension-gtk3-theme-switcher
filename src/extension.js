@@ -1,5 +1,3 @@
-'use strict';
-
 /* extension.js
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,21 +16,13 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-/* exported init */
+import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
+import { ThemeSettings, InterfaceSettings } from './settings.js';
 
-const Main = imports.ui.main;
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
-const { ThemeSettings, InterfaceSettings } = Me.imports.settings;
-
-class Extension {
-    constructor(uuid) {
-        this._uuid = uuid;
-    }
-
+export default class Gtk3ThemeSwitcher extends Extension {
     enable() {
         // Create settings
-        this._themeSettings = new ThemeSettings();
+        this._themeSettings = new ThemeSettings(this.getSettings());
         this._interfaceSettings = new InterfaceSettings();
 
         // Connect signals
@@ -57,8 +47,4 @@ class Extension {
         if (gtk_theme === themeName) return;
         this._interfaceSettings.gtkTheme = themeName;
     }
-}
-
-function init(meta) {
-    return new Extension(meta.uuid);
 }
